@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 style="color: blue">Game đoán số! Nhập vào các số từ 1 - 10 để đoán số trúng thưởng!</h1>
+<h1 id="result" style="color: red"></h1>
+<h1 id="nextRound" style="color: green"></h1>
+<input id="number" type="number" placeholder="Nhập vào con số của bạn ....">
+<button id="btn" onclick="playGame()">Chơi Đê</button>
+<label id="round" style="color: red"></label>
+<script>
+    let numberRandom = Math.floor(Math.random()*10)+1;
+    console.log('numberRandom --->', numberRandom)
+    let count = 3;
+    document.getElementById('round').innerHTML = 'Số lượt chơi của bạn là: '+ count;
+    function playGame() {
+        count--;
+        let number = +document.getElementById('number').value;
+        console.log('numberRandom trong', numberRandom)
+        document.getElementById('nextRound').innerHTML = '';
+        if(number === numberRandom){
+            document.getElementById('result').innerHTML = '<h1 style="color: rebeccapurple">'+'Trúng Phóc! Bạn là người chiến thắng! Chơi lại không? '+ '</h1>'
+            resetGame()
+        } else {
+            document.getElementById('round').innerHTML = 'Số lượt chơi còn lại: '+count;
+            document.getElementById('btn').innerHTML = 'Đoán Tiếp'
+            if(number<numberRandom){
+                document.getElementById('result').innerHTML = '<h1 style="color: green">'+'Số bạn đoán đang nhỏ hơn số trúng thưởng'+ '</h1>'
+            } else {
+                document.getElementById('result').innerHTML = '<h1 style="color: green">'+'Số bạn đoán đang lớn hơn số trúng thưởng'+ '</h1>'
+            }
+            if(count ===0){
+                document.getElementById('result').innerHTML = '<h1 style="color: red">'+ 'Chơi ngu vãi thua rồi! Chơi lại không?'+'</h1>'
+                document.getElementById('round').innerHTML = 'Hết lượt chơi rồi!!!';
+                resetGame()
+            }
+        }
+    }
+    function resetGame() {
+        // window.location.reload();
+        document.getElementById('btn').innerHTML = 'Chơi Đê'
+        count = 3;
+        document.getElementById('number').value = '';
+        // document.getElementById('result').innerHTML = '';
+        document.getElementById('round').innerHTML = 'Số lượt chơi của bạn là: '+ count;
+        numberRandom = Math.floor(Math.random()*10)+1;
+        console.log('numberRandom tạo lại --->', numberRandom)
+    }
+</script>
+</body>
+</html>
